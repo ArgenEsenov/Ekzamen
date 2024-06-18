@@ -14,8 +14,8 @@ class UserProfile(models.Model):
 
 
 class Follow(models.Model):
-    follower = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='follower')
-    following = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='following')
+    follower = models.ManyToManyField(UserProfile, on_delete=models.CASCADE, related_name='follower')
+    following = models.ManyToManyField(UserProfile, on_delete=models.CASCADE, related_name='following')
     created_at = models.DateTimeField()
 
     def __str__(self):
@@ -78,7 +78,7 @@ class Group(models.Model):
     name = models.CharField(max_length=40)
     description = models.TextField()
     creator = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='creator')
-    members = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='members')
+    members = models.ManyToManyField(UserProfile, on_delete=models.CASCADE, related_name='members')
     join_key = models.CharField(max_length=30)
 
     def __str__(self):
