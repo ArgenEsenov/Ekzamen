@@ -12,6 +12,7 @@ admin.site.register(CommentLike)
 admin.site.register(Story)
 admin.site.register(Group)
 
+
 @register(Post)
 class PostTranslationOptions(TranslationOptions):
     fields = ('user',)

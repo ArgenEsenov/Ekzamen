@@ -14,12 +14,12 @@ class UserProfile(models.Model):
 
 
 class Follow(models.Model):
-    follower = models.ManyToManyField(UserProfile, on_delete=models.CASCADE, related_name='follower')
-    following = models.ManyToManyField(UserProfile, on_delete=models.CASCADE, related_name='following')
-    created_at = models.DateTimeField()
+    follower = models.ManyToManyField(UserProfile,  related_name='follower')
+    following = models.ManyToManyField(UserProfile, related_name='following')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.followerUp} {self.followingUP}'
+        return f'{self.follower} {self.following}'
 
 
 class Post(models.Model):
@@ -78,7 +78,7 @@ class Group(models.Model):
     name = models.CharField(max_length=40)
     description = models.TextField()
     creator = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='creator')
-    members = models.ManyToManyField(UserProfile, on_delete=models.CASCADE, related_name='members')
+    members = models.ManyToManyField(UserProfile, related_name='members')
     join_key = models.CharField(max_length=30)
 
     def __str__(self):
